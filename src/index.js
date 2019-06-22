@@ -1,10 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {Route, Link,Switch, BrowserRouter as Router} from 'react-router-dom'
 
-const StarMatch=()=>{
-    const stars=5;
-    return(
+const About = () => {
+    return <div>About</div>;
+};
+
+const Help = () => {
+    return <div>Help</div>;
+};
+
+const Home = () => {
+    const stars = 5;
+    return (
         <div className="game">
 
             <div className="help">
@@ -14,7 +23,7 @@ const StarMatch=()=>{
             <div className="body">
                 <div className="left">
                     {
-                        [1,2,3,4,5].map(s=><div key={s} className="star"></div>)
+                        [1, 2, 3, 4, 5].map(s => <div key={s} className="star"></div>)
                     }
                 </div>
                 <div className="right">
@@ -35,9 +44,27 @@ const StarMatch=()=>{
     );
 
 }
-const App=()=>{
-    return(
-        <StarMatch/>
-    )
+
+const App = () => {
+    return (
+        <Router>
+            <div>
+                <h2>Welcome</h2>
+                <nav>
+                    <ul>
+                        <li><Link to={'/'}>Home</Link></li>
+                        <li><Link to={'/help'}>Help</Link></li>
+                        <li><Link to={'/about'}>About</Link></li>
+                    </ul>
+                </nav>
+                <hr/>
+                <Switch>
+                    <Route exact path={'/'} component={Home}/>
+                    <Route exact path={'/help'} component={Help}/>
+                    <Route exact path={'/about'} component={About}/>
+                </Switch>
+            </div>
+        </Router>);
 }
-ReactDOM.render(<App />, document.getElementById('root'));
+
+ReactDOM.render(<App/>, document.getElementById('root'));
